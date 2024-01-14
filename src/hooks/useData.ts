@@ -9,6 +9,7 @@ interface Location{
 }
 interface Condition{
     text:string;
+    icon:string;
 }
 
 interface Current{
@@ -17,13 +18,14 @@ interface Current{
 }
 
 interface Day{
-    avgtemp_c: number;
+    maxtemp_c: number;
+    mintemp_c:number;
+    condition: Condition;
 }
 
 export interface ForecastDay{
     date: string;
     day: Day;
-    condition: Condition;
 }
 
 interface Forcast{

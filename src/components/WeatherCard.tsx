@@ -1,36 +1,56 @@
-import { Button, ButtonGroup, Card, CardBody, CardFooter, Divider, Heading, Stack, Text } from '@chakra-ui/react'
-import { ForecastDay } from '../hooks/useData'
-
+import {
+  Card,
+  CardBody,
+  CardFooter,
+  Divider,
+  HStack,
+  Heading,
+  Image,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import { ForecastDay } from "../hooks/useData";
 
 interface Props {
-    day: ForecastDay
+  day: ForecastDay;
+  isMobile: boolean
 }
 
-const WeatherCard = ({day}:Props) => {
-
-    const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const WeatherCard = ({ day, isMobile }: Props) => {
+  const dayNames = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
 
   return (
-    <Card maxW='sm'>
-  <CardBody>
-    <Stack mt='6' spacing='3'>
-      <Heading size='md'>{dayNames[new Date(day.date).getDay()]}</Heading>
-      <Text>
-        This sofa is perfect for modern tropical spaces, baroque inspired
-        spaces, earthy toned spaces and for people who love a chic design with a
-        sprinkle of vintage design.
-      </Text>
-      <Text color='blue.600' fontSize='2xl'>
-        $450
-      </Text>
-    </Stack>
-  </CardBody>
-  <Divider />
-  <CardFooter>
-    
-  </CardFooter>
-</Card>
-  )
-}
+    <Card width={isMobile ? '350px' : '182px' }>
+      <CardBody>
+        <Stack mt="6" spacing="3">
+          <Heading size="md" textAlign="center">
+            {dayNames[new Date(day.date).getDay()]}
+          </Heading>
+          <Image src={day.day.condition.icon}/>
+          <Text textAlign='center'>{day.day.condition.text}</Text>
+        </Stack>
+      </CardBody>
+      <Divider />
+      <CardFooter>
+        <HStack spacing={isMobile ? 60 : 20}>
+          <Text color="blue.600" fontSize="1xl">
+            {day.day.mintemp_c}°
+          </Text>
+          <Text color="blue.600" fontSize="1xl">
+            {day.day.maxtemp_c}°
+          </Text>
+        </HStack>
+      </CardFooter>
+    </Card>
+  );
+};
 
-export default WeatherCard
+export default WeatherCard;
